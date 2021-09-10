@@ -1,0 +1,145 @@
+#chalkboard {
+    box-sizing: border-box;
+    background : rgb(0, 114, 0);
+    text-align: center;
+    width: 75vw;
+    position : relative;
+    margin-left: 12.5vw;
+    min-width: 50px;
+    height: 200px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+
+p {
+    margin: 0px;
+}
+
+body {
+    text-align: center;
+    background-color: black;
+}
+
+#keyPad {
+    width: 330px;
+    margin-left: calc(50vw - 165px);
+    margin-right: calc(50vw - 165px);
+    margin-top: 30px;
+}
+
+#algL {
+    float: left;
+    margin-top: inherit;
+}
+
+#algR {
+    float: right;
+    margin-top: inherit;
+    margin-right: 12.5px;
+}
+
+#middle {
+    margin-left: calc(50vw - 162.5px);
+    margin-top: 10px;
+    width: 325px;
+    margin-bottom: 30px;
+    height: 30px;
+    text-align: left;
+}
+
+#otherPad {
+    float: left;
+    margin-top: inherit;
+    width: 130px;
+}
+
+#opPad {
+    width: 80px;
+    float: left;
+}
+
+#numPad {
+    width: 120px;
+    float: right;
+    margin-top: inherit;
+    margin-right: 30px;
+}
+
+#delBut {
+    float: right;
+}
+
+#helpPad {
+    float: right;
+}
+
+.homoBut {
+    width: 40px;
+    height: 40px;
+    font-size: 30px;
+}
+
+#negBut {
+    float : left;
+    font-size: 20px;
+}
+
+#delBut {
+    text-align: left;
+    font-size: 18px;
+}
+
+#enterBut {
+    width: 80px;
+    height: 40px;
+    font-size: 20px;
+}
+
+.algs {
+    box-sizing: border-box;
+    border: 4px solid rgb(0, 183, 255);
+    height: 70px;
+    width: 150px;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 10px;
+    background-color: white;
+    font-size: 35px;
+}
+
+button {
+    text-align: center;
+    font-weight: bold;
+    background-color: white;
+    color:rgb(0, 183, 255);
+    -webkit-text-stroke: 1px black;
+    border: 2px solid gray;
+}
+
+#stepsBox {
+    box-sizing: border-box;
+    background-color: blueviolet;
+    text-align: center;
+    width: 75vw;
+    margin-left: 12.5vw;
+    min-width: 50px;
+    height: 200px;
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    border: 3px solid white;
+    border-radius: 10px;
+    margin-top: 250px;
+    clear: both
+}
+
+#randoBut {
+    box-sizing: border-box;
+    width: 50px;
+    height: 40px;
+    float: left;
+}
