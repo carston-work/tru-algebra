@@ -342,25 +342,27 @@ function clearHints() {
 }
 
 enterBut.addEventListener('click', () => {
-    const newStep = document.createElement('li')
-    if (op === '+') {
-        stepsText.push(`You added ${alg} to both sides.`)
-        undoList.push(['-', alg])
-    } else if (op === '-') {
-        stepsText.push(`You subtracted ${alg} from both sides.`)
-        undoList.push(['+', alg])
-    } else if (op === '×') {
-        stepsText.push(`You multiplied both sides by ${alg}.`)
-        undoList.push(['÷', alg])
-    } else if (op === '÷') {
-        stepsText.push(`You divided by ${alg} on both sides.`)
-        undoList.push(['×', alg])
+    if (op && alg !== 0 && alg !== 1) {
+        const newStep = document.createElement('li')
+        if (op === '+') {
+            stepsText.push(`You added ${alg} to both sides.`)
+            undoList.push(['-', alg])
+        } else if (op === '-') {
+            stepsText.push(`You subtracted ${alg} from both sides.`)
+            undoList.push(['+', alg])
+        } else if (op === '×') {
+            stepsText.push(`You multiplied both sides by ${alg}.`)
+            undoList.push(['÷', alg])
+        } else if (op === '÷') {
+            stepsText.push(`You divided by ${alg} on both sides.`)
+            undoList.push(['×', alg])
+        }
+        clearHints()
+        doMath()
+        MathJax.typeset()
+        newStep.textContent = stepsText[stepsText.length-1]
+        stepsTextList.appendChild(newStep)
     }
-    clearHints()
-    doMath()
-    MathJax.typeset()
-    newStep.textContent = stepsText[stepsText.length-1]
-    stepsTextList.appendChild(newStep)
 })
 
 function randoProb(diff) {
