@@ -12,12 +12,15 @@ let rightSideDenominator = 1
 let rightSide = ''
 equation.textContent = `$$${leftSide}=${startNum}$$`
 const helpPad = document.getElementById('helpPad')
-// const randoBut = document.createElement('button')
-// randoBut.id = 'randoBut'
-// randoBut.textContent = 'New'
-// helpPad.appendChild(randoBut)
+const randoBut = document.createElement('button')
+randoBut.id = 'randoBut'
+randoBut.textContent = 'New'
+helpPad.appendChild(randoBut)
 
-const steps = [['base', startNum]];
+let stepsText = []
+const stepsTextList = document.getElementById('steps')
+
+let steps = [['base', startNum]];
 
 for (let i = 0; i <= 9; i++) {
     const numBut = document.createElement('button');
@@ -44,6 +47,7 @@ const operators = ["+", "-", "×", "÷"]
 for (let i = 0; i < 4; i++) {
     const opBut = document.createElement('button')
     opBut.textContent = operators[i];
+    opBut.id = operators[i]
     opBut.addEventListener('click', (event) => {
         op = event.target.textContent
         algL.textContent = op
@@ -116,7 +120,7 @@ const enterBut = document.createElement('button')
 enterBut.textContent = 'Enter'
 enterBut.id = 'enterBut'
 
-document.querySelector('#opPad').appendChild(enterBut);
+document.querySelector('#keyPad').appendChild(enterBut);
 
 function gcf(a, b) {
     if (a === 0) {
@@ -246,6 +250,8 @@ function simpLeft(multi, div) {
     }
 }
 
+let undoList = []
+
 function doMath() {
     if (op && alg !== 0 ) {
         if (op === '+' || op === '-') { // ADDITION - SUBTRACTION
@@ -327,9 +333,34 @@ function doMath() {
     alsoR()
 }
 
+function clearHints() {
+    document.getElementById('opPad').childNodes.forEach(elem => {
+        if (elem.classList.contains('hintColor')) {
+            elem.classList.remove('hintColor')
+        }
+    })
+}
+
 enterBut.addEventListener('click', () => {
+    const newStep = document.createElement('li')
+    if (op === '+') {
+        stepsText.push(`You added ${alg} to both sides.`)
+        undoList.push(['-', alg])
+    } else if (op === '-') {
+        stepsText.push(`You subtracted ${alg} from both sides.`)
+        undoList.push(['+', alg])
+    } else if (op === '×') {
+        stepsText.push(`You multiplied both sides by ${alg}.`)
+        undoList.push(['÷', alg])
+    } else if (op === '÷') {
+        stepsText.push(`You divided by ${alg} on both sides.`)
+        undoList.push(['×', alg])
+    }
+    clearHints()
     doMath()
     MathJax.typeset()
+    newStep.textContent = stepsText[stepsText.length-1]
+    stepsTextList.appendChild(newStep)
 })
 
 function randoProb(diff) {
@@ -341,4 +372,67 @@ function randoProb(diff) {
     }
 }
 
-randoProb(5)
+randoProb(3)
+
+function newProb() {
+    clearHints()
+    undoList = []
+    newNum = Math.floor(Math.random()*20-10)
+    equation.textContent = `$$x=${newNum}$$`
+    leftSide = 'x'
+    rightSideDenominator = 1
+    rightSideNumerator = newNum
+    steps = [['base', newNum]]
+    randoProb(3)
+    stepsText = []
+    while (stepsTextList.firstElementChild) {
+        stepsTextList.firstElementChild.remove()
+    }
+    MathJax.typeset()
+}
+
+randoBut.addEventListener('click', newProb)
+
+const hintBut = document.createElement('button')
+hintBut.textContent = "Hint"
+hintBut.id = 'hintBut'
+hintBut.classList.add('homoBut')
+helpPad.appendChild(hintBut)
+
+function getHint() {
+    const lastStep = steps[steps.length-1]
+    if (lastStep[0] === 'addsub') {
+        if (lastStep[1] > 0) {
+            document.getElementById('-').classList.add('hintColor')
+        } else {
+            document.getElementById('+').classList.add('hintColor')
+        }
+    } else if (lastStep[0] === 'multi') {
+        document.getElementById('÷').classList.add('hintColor')
+    } else if (lastStep[0] === 'div') {
+        document.getElementById('×').classList.add('hintColor')
+    }
+}
+
+hintBut.addEventListener('click', getHint)
+
+const undoBut = document.createElement('button')
+undoBut.textContent = "Undo"
+undoBut.id = 'undoBut'
+undoBut.classList.add('homoBut')
+helpPad.appendChild(undoBut)
+
+function undoLast() {
+    if (undoList.length > 0) {
+        op = undoList[undoList.length-1][0]
+        alg = undoList[undoList.length-1][1]
+        doMath()
+        undoList.pop()
+        stepsText.pop()
+        MathJax.typeset()
+        clearHints()
+        document.getElementById('steps').lastElementChild.remove()
+    }
+}
+
+undoBut.addEventListener('click', undoLast)

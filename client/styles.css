@@ -4,7 +4,8 @@
     text-align: center;
     width: 75vw;
     position : relative;
-    margin-left: 12.5vw;
+    margin-left: auto;
+    margin-right: auto;
     min-width: 50px;
     height: 200px;
     color: white;
@@ -24,11 +25,18 @@ body {
     background-color: black;
 }
 
-#keyPad {
+#allButs {
+    margin-left: auto;
+    margin-right: auto;
     width: 330px;
-    margin-left: calc(50vw - 165px);
-    margin-right: calc(50vw - 165px);
-    margin-top: 30px;
+    margin-top: 60px;
+}
+
+#keyPad {
+    width: 240px;
+    margin-left: auto;
+    margin-right: auto;
+    float: right;
 }
 
 #algL {
@@ -43,7 +51,8 @@ body {
 }
 
 #middle {
-    margin-left: calc(50vw - 162.5px);
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 10px;
     width: 325px;
     margin-bottom: 30px;
@@ -51,52 +60,50 @@ body {
     text-align: left;
 }
 
-#otherPad {
-    float: left;
-    margin-top: inherit;
-    width: 130px;
-}
-
 #opPad {
-    width: 80px;
-    float: left;
+    width: 60px;
+    margin: 0px;
+    float: right;
 }
 
 #numPad {
-    width: 120px;
-    float: right;
-    margin-top: inherit;
-    margin-right: 30px;
-}
-
-#delBut {
-    float: right;
+    width: 180px;
 }
 
 #helpPad {
-    float: right;
+    float: left;
+    width: 60px;
+}
+
+#hintBut {
+    font-size: 20px;
+}
+
+#undoBut {
+    font-size: 18px;
 }
 
 .homoBut {
-    width: 40px;
-    height: 40px;
-    font-size: 30px;
+    width: 60px;
+    height: 60px;
+    font-size: 45px;
 }
 
 #negBut {
     float : left;
-    font-size: 20px;
+    font-size: 30px;
 }
 
 #delBut {
+    float: right;
     text-align: left;
-    font-size: 18px;
+    font-size: 27px;
 }
 
 #enterBut {
-    width: 80px;
-    height: 40px;
-    font-size: 20px;
+    width: 240px;
+    height: 60px;
+    font-size: 30px;
 }
 
 .algs {
@@ -120,12 +127,18 @@ button {
     border: 2px solid gray;
 }
 
+.hintColor {
+    background-color: mediumspringgreen;
+}
+
 #stepsBox {
     box-sizing: border-box;
     background-color: blueviolet;
     text-align: center;
     width: 75vw;
-    margin-left: 12.5vw;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 380px;
     min-width: 50px;
     height: 200px;
     color: white;
@@ -133,13 +146,14 @@ button {
     font-size: 20px;
     border: 3px solid white;
     border-radius: 10px;
-    margin-top: 250px;
-    clear: both
+    clear: both;
+    display: block;
+    overflow-y: auto;
 }
 
 #randoBut {
     box-sizing: border-box;
-    width: 50px;
-    height: 40px;
-    float: left;
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
 }
