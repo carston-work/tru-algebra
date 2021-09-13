@@ -278,10 +278,14 @@ function doMath() {
                 if (steps[steps.length-2][0] === 'div') {
                     steps[steps.length-1][1] *= alg
                     simpLeft(steps[steps.length-1][1], steps[steps.length-2][1])
+                } else if (steps[steps.length-2][0] === 'addsub') {
+                    steps[steps.length-1][1] *= alg
+                    updateLeftNoFrac(steps[steps.length-1][1])
+                    if (steps[steps.length-1][1] === 1) {removeParenthesesNoFrac();}
                 } else {
                     steps[steps.length-1][1] *= alg
                     updateLeftNoFrac(steps[steps.length-1][1])
-                    if (steps[steps.length-1][1] === 1) steps.pop()
+                    if (steps[steps.length-1][1] === 1) {steps.pop(); leftSide = 'x'}
                 }
             } else if (steps[steps.length-1][0] === 'div') {
                 if (steps[steps.length-2][0] === 'addsub') {
@@ -316,6 +320,7 @@ function doMath() {
                 } else {
                     steps[steps.length-1][1] *= alg
                     updateLeftDenom(steps[steps.length-1][1])
+                    if (steps[steps.length-1][1] === 1) removeFrac() 
                 } 
             } else {
                 leftSide = `\\frac{${leftSide}}{${alg}}`
@@ -342,7 +347,7 @@ function clearHints() {
 }
 
 enterBut.addEventListener('click', () => {
-    if (op && alg !== 0 && alg !== 1) {
+    if (op && alg !== 0 && ((op === '×' || op === '÷') ? alg !== 1 : true)) {
         const newStep = document.createElement('li')
         if (op === '+') {
             stepsText.push(`You added ${alg} to both sides.`)
@@ -362,6 +367,7 @@ enterBut.addEventListener('click', () => {
         MathJax.typeset()
         newStep.textContent = stepsText[stepsText.length-1]
         stepsTextList.appendChild(newStep)
+        console.log(steps)
     }
 })
 
