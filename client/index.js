@@ -367,7 +367,6 @@ enterBut.addEventListener('click', () => {
         MathJax.typeset()
         newStep.textContent = stepsText[stepsText.length-1]
         stepsTextList.appendChild(newStep)
-        console.log(steps)
     }
 })
 
